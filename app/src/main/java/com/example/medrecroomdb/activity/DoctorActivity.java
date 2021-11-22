@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,18 +21,28 @@ import com.example.medrecroomdb.viewmodel.DoctorViewModel;
 
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DoctorActivity extends AppCompatActivity {
 
     private DoctorViewModel doctorViewModel;
     private Button btnAddDoctor;
-    private EditText txtDoctorFirstName, txtDoctorLastName, txtDoctorEmail, txtDoctorLicense, txtPassword;
+    private EditText etDoctorFirstName, etDoctorLastName, etDoctorEmail, etDoctorLicense, etPassword;
     Doctor doctor;
+
+    boolean allFieldsChecked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
+
+        etDoctorFirstName = findViewById(R.id.txtDoctorFirstName);
+        etDoctorLastName = findViewById(R.id.txtDoctorLastName);
+        etDoctorEmail = findViewById(R.id.txtDoctorEmail);
+        etDoctorLicense = findViewById(R.id.txtDoctorLicense);
+        etPassword = findViewById(R.id.txtPassword);
 
         TableLayout displayTable = (TableLayout) findViewById(R.id.displayTable);
         doctorViewModel = ViewModelProviders.of(this).get(DoctorViewModel.class);
@@ -60,7 +71,7 @@ public class DoctorActivity extends AppCompatActivity {
                     TableRow row = new TableRow(getApplicationContext());
                     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                     lp.weight = 1;
-                    lp.setMargins(10,5,10,5);
+                    lp.setMargins(10, 5, 10, 5);
                     row.setLayoutParams(lp);
 
                     TextView id = new TextView(getApplicationContext());
@@ -103,26 +114,63 @@ public class DoctorActivity extends AppCompatActivity {
         btnAddDoctor.setOnClickListener(new View.OnClickListener() {
             //Implement the event handler method
             public void onClick(View v) {
-                final int random = new Random().nextInt(100000-1) + 100000;
-                doctor.setDoctorId(Integer.parseInt(Integer.toString(random)));
+                allFieldsChecked = CheckAllFields();
+                if (allFieldsChecked) {
+                    final int random = new Random().nextInt(100000 - 1) + 100000;
+                    doctor.setDoctorId(Integer.parseInt(Integer.toString(random)));
 
-                txtDoctorFirstName = findViewById(R.id.txtDoctorFirstName);
-                doctor.setFirstName(txtDoctorFirstName.getText().toString());
+                    doctor.setFirstName(etDoctorFirstName.getText().toString());
 
-                txtDoctorLastName = findViewById(R.id.txtDoctorLastName);
-                doctor.setLastName(txtDoctorLastName.getText().toString());
+                    doctor.setLastName(etDoctorLastName.getText().toString());
 
-                txtDoctorEmail = findViewById(R.id.txtDoctorEmail);
-                doctor.setEmail(txtDoctorEmail.getText().toString());
+                    doctor.setEmail(etDoctorEmail.getText().toString());
 
-                txtDoctorLicense = findViewById(R.id.txtDoctorLicense);
-                doctor.setDoctorLicenseNumber(txtDoctorLicense.getText().toString());
+                    doctor.setDoctorLicenseNumber(etDoctorLicense.getText().toString());
 
-                txtPassword = findViewById(R.id.txtPassword);
-                doctor.setPassword(txtPassword.getText().toString());
+                    doctor.setPassword(etPassword.getText().toString());
 
-                doctorViewModel.insert(doctor);
+                    doctorViewModel.insert(doctor);
+
+                    etDoctorFirstName.setText("");
+                    etDoctorLastName.setText("");
+                    etDoctorEmail.setText("");
+                    etDoctorLicense.setText("");
+                    etPassword.setText("");
+                }
             }
         });
+    }
+
+    // function to check all text fields
+    private boolean CheckAllFields() {
+        if (etDoctorFirstName.length() == 0) {
+            etDoctorFirstName.setError("This field is required");
+            return false;
+        }
+        if (etDoctorLastName.length() == 0) {
+            etDoctorLastName.setError("This field is required");
+            return false;
+        }
+
+        if (etDoctorEmail.length() == 0) {
+            etDoctorEmail.setError("This field is required");
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(etDoctorEmail.getText().toString()).matches()) {
+            etDoctorEmail.setError("Please enter a valid email");
+            return false;
+        }
+        if (etDoctorLicense.length() == 0) {
+            etDoctorLicense.setError("This field is required");
+            return false;
+        }
+        if (etPassword.length() == 0) {
+            etPassword.setError("This field is required");
+            return false;
+        } else if (etPassword.length() < 8) {
+            etPassword.setError("Password must be minimum 8 characters");
+            return false;
+        }
+        return true;
     }
 }

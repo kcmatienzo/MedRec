@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,22 +25,35 @@ import com.example.medrecroomdb.viewmodel.PatientViewModel;
 
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AdminActivity extends AppCompatActivity {
 
     private AdminViewModel adminViewModel;
     private Button btnAddAdmin;
-    private EditText txtAdminFirstName, txtAdminLastName, txtAdminEmail, txtAdminEmployeeNumber, txtPassword;
+    private EditText etAdminFirstName, etAdminLastName, etAdminEmail, etAdminEmployeeNumber, etPassword;
     Admin admin;
+
+    // one boolean to check all fields
+    boolean allFieldsChecked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        etAdminFirstName = findViewById(R.id.txtAdminFirstName);
+        etAdminLastName = findViewById(R.id.txtAdminLastName);
+        etAdminEmail = findViewById(R.id.txtAdminEmail);
+        etAdminEmployeeNumber = findViewById(R.id.txtAdminEmployeeNumber);
+        etPassword = findViewById(R.id.txtPassword);
+
         TableLayout displayTable = (TableLayout) findViewById(R.id.displayTable);
         adminViewModel = ViewModelProviders.of(this).get(AdminViewModel.class);
         //
+
+
         admin = new Admin();
         //
         adminViewModel.getInsertResult().observe(this, new Observer<Integer>() {
@@ -64,7 +78,7 @@ public class AdminActivity extends AppCompatActivity {
                     TableRow row = new TableRow(getApplicationContext());
                     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                     lp.weight = 1;
-                    lp.setMargins(10,5,10,5);
+                    lp.setMargins(10, 5, 10, 5);
                     row.setLayoutParams(lp);
 
                     TextView id = new TextView(getApplicationContext());
@@ -101,32 +115,67 @@ public class AdminActivity extends AppCompatActivity {
                 }
             }
         });
-
-
         btnAddAdmin = findViewById(R.id.btnAddAdmin);
         btnAddAdmin.setOnClickListener(new View.OnClickListener() {
             //Implement the event handler method
             public void onClick(View v) {
-                final int random = new Random().nextInt(100000-1) + 100000;
-                admin.setAdminId(Integer.parseInt(Integer.toString(random)));
+                allFieldsChecked = CheckAllFields();
+                if (allFieldsChecked) {
+                    final int random = new Random().nextInt(100000 - 1) + 100000;
+                    admin.setAdminId(Integer.parseInt(Integer.toString(random)));
 
-                txtAdminFirstName = findViewById(R.id.txtAdminFirstName);
-                admin.setFirstName(txtAdminFirstName.getText().toString());
+                    admin.setFirstName(etAdminFirstName.getText().toString());
 
-                txtAdminLastName = findViewById(R.id.txtAdminLastName);
-                admin.setLastName(txtAdminLastName.getText().toString());
+                    admin.setLastName(etAdminLastName.getText().toString());
 
-                txtAdminEmail = findViewById(R.id.txtAdminEmail);
-                admin.setEmail(txtAdminEmail.getText().toString());
+                    admin.setEmail(etAdminEmail.getText().toString());
 
-                txtAdminEmployeeNumber = findViewById(R.id.txtAdminEmployeeNumber);
-                admin.setEmployeeId(txtAdminEmployeeNumber.getText().toString());
+                    admin.setEmployeeId(etAdminEmployeeNumber.getText().toString());
 
-                txtPassword = findViewById(R.id.txtPassword);
-                admin.setPassword(txtPassword.getText().toString());
+                    admin.setPassword(etPassword.getText().toString());
 
-                adminViewModel.insert(admin);
+                    adminViewModel.insert(admin);
+
+                    etAdminFirstName.setText("");
+                    etAdminLastName.setText("");
+                    etAdminEmail.setText("");
+                    etAdminEmployeeNumber.setText("");
+                    etPassword.setText("");
+                }
             }
         });
+
+    }
+
+    // function to check all text fields
+    private boolean CheckAllFields() {
+        if (etAdminFirstName.length() == 0) {
+            etAdminFirstName.setError("This field is required");
+            return false;
+        }
+        if (etAdminLastName.length() == 0) {
+            etAdminLastName.setError("This field is required");
+            return false;
+        }
+        if (etAdminEmail.length() == 0) {
+            etAdminEmail.setError("This field is required");
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(etAdminEmail.getText().toString()).matches()) {
+            etAdminEmail.setError("Please enter a valid email");
+            return false;
+        }
+        if (etAdminEmployeeNumber.length() == 0) {
+            etAdminEmployeeNumber.setError("This field is required");
+            return false;
+        }
+        if (etPassword.length() == 0) {
+            etPassword.setError("This field is required");
+            return false;
+        } else if (etPassword.length() < 8) {
+            etPassword.setError("Password must be minimum 8 characters");
+            return false;
+        }
+        return true;
     }
 }

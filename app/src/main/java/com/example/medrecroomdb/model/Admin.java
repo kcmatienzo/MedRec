@@ -1,5 +1,6 @@
 package com.example.medrecroomdb.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,11 +8,15 @@ import androidx.room.PrimaryKey;
 public class Admin {
     @PrimaryKey
     private int adminId;
-
+    @NonNull
     private String firstName;
+    @NonNull
     private String lastName;
+    @NonNull
     private String email;
+    @NonNull
     private String employeeId;
+    @NonNull
     private String password;
 
     public int getAdminId() {
