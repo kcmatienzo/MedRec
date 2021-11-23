@@ -68,11 +68,17 @@
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"/>-->
 
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login" />
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/user_array"/>
+        android:layout_height="37dp"
+        android:entries="@array/user_array" />
 
     <Button
         android:id="@+id/btnRegister"

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 import com.example.medrecroomdb.activity.AdminActivity;
 import com.example.medrecroomdb.activity.DoctorActivity;
 import com.example.medrecroomdb.activity.PatientActivity;
+import com.example.medrecroomdb.activity.SearchPatientActivity;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         parent.getItemAtPosition(pos);
         Button registerButton = (Button)findViewById(R.id.btnRegister);
+        Button loginButton = (Button)findViewById(R.id.btnLogin);
+
         switch(parent.getItemAtPosition(pos).toString())
         {
             case "Patient":
@@ -44,6 +48,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     public void onClick(View v) {
                         Intent intentPatient = new Intent(v.getContext(), PatientActivity.class);
                         startActivity(intentPatient);
+                    }
+                });
+                loginButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentPatient = new Intent(v.getContext(), PatientActivity.class);
+                        startActivity(intentPatient);
+                        Log.i("SpinnerClick", "Patient has been clicked");
                     }
                 });
                 break;
@@ -56,6 +68,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         startActivity(intentDoctor);
                     }
                 });
+                loginButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentDoctor = new Intent(v.getContext(), SearchPatientActivity.class);
+                        startActivity(intentDoctor);
+                        Log.i("SpinnerClick", "Doctor has been clicked");
+                    }
+                });
                 break;
             case "Admin":
                 registerButton = (Button) findViewById(R.id.btnRegister);
@@ -66,10 +86,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         startActivity(intentAdmin);
                     }
                 });
+                loginButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentAdmin = new Intent(v.getContext(), AdminActivity.class);
+                        startActivity(intentAdmin);
+                        Log.i("SpinnerClick", "Admin has been clicked");
+                    }
+                });
                 break;
         }
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
+        Log.i("Error", "Must choose a role");
     }
+
+//    public void clickFunction(View view) {
+//        Button loginButton = (Button)findViewById(R.id.btnLogin);
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//    }
 }
