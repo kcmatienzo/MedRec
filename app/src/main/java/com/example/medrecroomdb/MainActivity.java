@@ -19,6 +19,7 @@ import com.example.medrecroomdb.activity.AdminActivity;
 import com.example.medrecroomdb.activity.DoctorActivity;
 import com.example.medrecroomdb.activity.PatientActivity;
 import com.example.medrecroomdb.activity.SearchPatientActivity;
+import com.example.medrecroomdb.activity.SearchUserActivity;
 import com.example.medrecroomdb.model.Admin;
 import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
@@ -89,14 +90,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Intent intentPatient = new Intent(v.getContext(), SearchPatientActivity.class);
                         startActivity(intentPatient);
                     } else if (admin != null && admin.getAdminId() == userId && admin.getPassword().equals(password)) {
-                        Intent intentAdmin = new Intent(v.getContext(), SearchPatientActivity.class);
+                        Intent intentAdmin = new Intent(v.getContext(), SearchUserActivity.class);
                         startActivity(intentAdmin);
                     } else {
                         // Otherwise, show error message
                         Toast.makeText(getApplicationContext(), "Invalid username/password", Toast.LENGTH_SHORT).show();
                     }
                 } catch(Exception e) {
-                    Toast.makeText(getApplicationContext(),e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please enter username and password.", Toast.LENGTH_SHORT).show();
                     System.out.print(e.getMessage());
                 }
             }

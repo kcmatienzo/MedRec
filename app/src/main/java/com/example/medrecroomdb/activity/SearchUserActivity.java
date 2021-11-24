@@ -8,21 +8,22 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.medrecroomdb.R;
-import com.example.medrecroomdb.model.Patient;
-import com.example.medrecroomdb.viewmodel.PatientViewModel;
+import com.example.medrecroomdb.model.Admin;
+import com.example.medrecroomdb.viewmodel.AdminViewModel;
 
-public class SearchPatientActivity extends AppCompatActivity {
+
+public class SearchUserActivity extends AppCompatActivity {
     // Declare variables
     SharedPreferences pref;
-    private PatientViewModel patientViewModel;
-    private Button btnSearchPatient;
-    private EditText editText_pHealthcardNumber;
-    Patient patient;
+    private AdminViewModel adminViewModel;
+    private Button btnSearchUser;
+    private EditText editText_searchUserId;
+    Admin admin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctor_searchpatient);
+        setContentView(R.layout.activity_admin_searchuser);
 
         // Set up references
         pref = getSharedPreferences("nurse_information", MODE_PRIVATE);
