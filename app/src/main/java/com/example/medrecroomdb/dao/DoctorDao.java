@@ -15,6 +15,9 @@ public interface DoctorDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Doctor Doctor);
 
+    @Query("SELECT * FROM Doctor WHERE doctorId = :doctorId")
+    Doctor findByDoctorId(int doctorId); // find patient based on doctorId
+
     @Query("select * from Doctor order by doctorId")
     LiveData<List<Doctor>> getAllDoctors();
 }

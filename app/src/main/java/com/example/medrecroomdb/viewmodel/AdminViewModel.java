@@ -35,4 +35,6 @@ public class AdminViewModel extends AndroidViewModel {
     //returns query results as live data object
     public LiveData<List<Admin>> getAllAdmins() { return allAdmins; }
 
+//    // Create a wrapper findByAdminId() method that calls the Repository’s findByAdminId() method
+    public Admin findByAdminId(int adminId) { return adminRepository.findByAdminId(adminId); }
 }

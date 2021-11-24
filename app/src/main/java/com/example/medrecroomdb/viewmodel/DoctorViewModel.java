@@ -33,4 +33,7 @@ public class DoctorViewModel extends AndroidViewModel {
     //returns query results as live data object
     public LiveData<List<Doctor>> getAllDoctors() { return allDoctors; }
 
+    // Create a wrapper findByNurseId() method that calls the Repository’s findByDoctorId() method
+    public Doctor findByDoctorId(int doctorId) { return doctorRepository.findByDoctorId(doctorId); }
+
 }

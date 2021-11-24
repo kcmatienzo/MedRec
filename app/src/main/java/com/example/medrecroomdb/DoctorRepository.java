@@ -32,6 +32,10 @@ public class DoctorRepository {
     public LiveData<List<Doctor>> getDoctorList() {
         return doctorList;
     }
+
+    // Find doctor, this is called from ViewModel
+    public Doctor findByDoctorId(int doctorId) { return doctorDao.findByDoctorId(doctorId); }
+
     //inserts a person asynchronously
     public void insert(Doctor doctor) {
         insertAsync(doctor);

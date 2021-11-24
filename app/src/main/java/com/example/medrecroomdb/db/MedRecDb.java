@@ -26,7 +26,9 @@ public abstract class MedRecDb extends RoomDatabase {
         if (INSTANCE == null) {
             //Create database object
             INSTANCE = Room.databaseBuilder(context,
-                    MedRecDb.class, DATABASE_NAME).build();
+                    MedRecDb.class, DATABASE_NAME)
+                    .allowMainThreadQueries() // To access database on main thread for testing
+                    .build();
         }
         return INSTANCE;
     }

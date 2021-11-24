@@ -15,6 +15,9 @@ public interface PatientDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Patient Patient);
 
+    @Query("SELECT * FROM Patient WHERE patientId = :patientId")
+    Patient findByPatientId(int patientId); // find patient based on patientId
+
     //Monitoring Query Result Changes with Live Data
     @Query("select * from Patient order by patientId")
     LiveData<List<Patient>> getAllPatients();

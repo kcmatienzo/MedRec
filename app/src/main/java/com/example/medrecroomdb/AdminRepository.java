@@ -34,6 +34,10 @@ public class AdminRepository {
     public LiveData<List<Admin>> getAdminList() {
         return adminList;
     }
+
+//    // Find admin, this is called from ViewModel
+    public Admin findByAdminId(int adminId) { return adminDao.findByAdminId(adminId); }
+
     //inserts a person asynchronously
     public void insert(Admin admin) {
         insertAsync(admin);

@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.example.medrecroomdb.PatientRepository;
+import com.example.medrecroomdb.model.Admin;
 import com.example.medrecroomdb.model.Patient;
 import java.util.List;
 
@@ -30,4 +31,6 @@ public class PatientViewModel extends AndroidViewModel {
     //returns query results as live data object
     public LiveData<List<Patient>> getAllPatients() { return allPatients; }
 
+    // Create a wrapper findByPatientId() method that calls the Repository’s findByPatientId() method
+    public Patient findByPatientId(int patientId) { return patientRepository.findByPatientId(patientId); }
 }

@@ -58,10 +58,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.385"
         tools:layout_conversion_absoluteHeight="48dp"
-        tools:layout_conversion_absoluteWidth="240dp"
-        tools:layout_editor_absoluteY="259dp" />
+        tools:layout_conversion_absoluteWidth="240dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
