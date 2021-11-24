@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         parent.getItemAtPosition(pos);
         Button registerButton = (Button)findViewById(R.id.btnRegister);
-        Button loginButton = (Button)findViewById(R.id.btnLogin);
 
         switch(parent.getItemAtPosition(pos).toString())
         {
@@ -140,20 +139,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     }
                 });
                 break;
+            case "":
+                registerButton.setOnClickListener(new View.OnClickListener() {
+                    //Implement the event handler method
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(),"Please select your Role", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
         }
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
-        Log.i("Error", "Must choose a role");
-    }
 
-//    public void clickFunction(View view) {
-//        Button loginButton = (Button)findViewById(R.id.btnLogin);
-//        loginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//    }
+    }
 }
