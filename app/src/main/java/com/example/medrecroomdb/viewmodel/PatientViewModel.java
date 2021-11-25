@@ -33,4 +33,8 @@ public class PatientViewModel extends AndroidViewModel {
 
     // Create a wrapper findByPatientId() method that calls the Repository’s findByPatientId() method
     public Patient findByPatientId(int patientId) { return patientRepository.findByPatientId(patientId); }
+
+    // Create a wrapper findByPatientId() method that calls the Repository’s findByPatientId() method
+    public Patient findByHealthcardNumber(String healthcardNumber) {
+        return patientRepository.findByHealthcardNumber(healthcardNumber); }
 }

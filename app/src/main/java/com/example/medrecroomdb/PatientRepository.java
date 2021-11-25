@@ -44,6 +44,9 @@ public class PatientRepository {
     // Find patient, this is called from ViewModel
     public Patient findByPatientId(int patientId) { return patientDao.findByPatientId(patientId); }
 
+    // Find patient's healthcard number, this is called from ViewModel
+    public Patient findByHealthcardNumber(String healthcardNumber) { return patientDao.findByPatientHealthcard(healthcardNumber); }
+
     private void insertAsync(final Patient patient) {
 
         new Thread(new Runnable() {

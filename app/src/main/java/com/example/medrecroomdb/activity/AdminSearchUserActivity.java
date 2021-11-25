@@ -12,7 +12,7 @@ import com.example.medrecroomdb.model.Admin;
 import com.example.medrecroomdb.viewmodel.AdminViewModel;
 
 
-public class SearchUserActivity extends AppCompatActivity {
+public class AdminSearchUserActivity extends AppCompatActivity {
     // Declare variables
     SharedPreferences pref;
     private AdminViewModel adminViewModel;

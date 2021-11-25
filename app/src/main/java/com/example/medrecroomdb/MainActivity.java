@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,8 +16,8 @@ import android.widget.Toast;
 import com.example.medrecroomdb.activity.AdminActivity;
 import com.example.medrecroomdb.activity.DoctorActivity;
 import com.example.medrecroomdb.activity.PatientActivity;
-import com.example.medrecroomdb.activity.SearchPatientActivity;
-import com.example.medrecroomdb.activity.SearchUserActivity;
+import com.example.medrecroomdb.activity.DoctorSearchPatientActivity;
+import com.example.medrecroomdb.activity.AdminSearchUserActivity;
 import com.example.medrecroomdb.model.Admin;
 import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
@@ -83,14 +81,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                     // Validate if nurseId and Password match the info in AppDatabase and if both are filled, return successful result
                     if (doctor != null && doctor.getDoctorId() == userId && doctor.getPassword().equals(password)) {
-                        Intent intentDoctor = new Intent(v.getContext(), SearchPatientActivity.class);
+                        Intent intentDoctor = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
                         startActivity(intentDoctor);
 
                     } else if (patient != null && patient.getPatientId() == userId && patient.getPassword().equals(password)) {
-                        Intent intentPatient = new Intent(v.getContext(), SearchPatientActivity.class);
+                        Intent intentPatient = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
                         startActivity(intentPatient);
                     } else if (admin != null && admin.getAdminId() == userId && admin.getPassword().equals(password)) {
-                        Intent intentAdmin = new Intent(v.getContext(), SearchUserActivity.class);
+                        Intent intentAdmin = new Intent(v.getContext(), AdminSearchUserActivity.class);
                         startActivity(intentAdmin);
                     } else {
                         // Otherwise, show error message

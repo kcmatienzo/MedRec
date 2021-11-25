@@ -19,10 +19,16 @@
             android:name=".activity.PatientActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SearchPatientActivity"
+            android:name=".activity.DoctorSearchPatientActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SearchUserActivity"
+            android:name=".activity.DoctorSearchResultsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminSearchUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminSearchResultsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

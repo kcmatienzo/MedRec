@@ -18,6 +18,9 @@ public interface PatientDao {
     @Query("SELECT * FROM Patient WHERE patientId = :patientId")
     Patient findByPatientId(int patientId); // find patient based on patientId
 
+    @Query("SELECT * FROM Patient WHERE healthcardNumber = :healthcardNumber")
+    Patient findByPatientHealthcard(String healthcardNumber); // find patient based on healthcard number
+
     //Monitoring Query Result Changes with Live Data
     @Query("select * from Patient order by patientId")
     LiveData<List<Patient>> getAllPatients();
