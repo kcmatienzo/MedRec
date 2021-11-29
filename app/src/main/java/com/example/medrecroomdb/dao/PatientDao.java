@@ -12,7 +12,7 @@ import java.util.List;
 
 @Dao
 public interface PatientDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     void insert(Patient Patient);
 
     @Query("SELECT * FROM Patient WHERE patientId = :patientId")

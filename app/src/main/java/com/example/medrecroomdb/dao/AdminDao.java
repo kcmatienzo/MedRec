@@ -13,7 +13,7 @@ import java.util.List;
 
 @Dao
 public interface AdminDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
     void insert(Admin Admin);
 
     @Query("SELECT * FROM Admin WHERE adminId = :adminId")

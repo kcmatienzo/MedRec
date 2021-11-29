@@ -1,9 +1,11 @@
 package com.example.medrecroomdb.model;
 
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(indices = {@Index(value = {"healthcardNumber"},
+        unique = true)})
 public class Patient {
     @PrimaryKey
     private int patientId;
