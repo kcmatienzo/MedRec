@@ -18,6 +18,9 @@ public interface DoctorDao {
     @Query("SELECT * FROM Doctor WHERE doctorId = :doctorId")
     Doctor findByDoctorId(int doctorId); // find patient based on doctorId
 
+    @Query("SELECT * FROM Doctor WHERE email = :email")
+    Doctor findByDoctorEmail(String email); // find patient based on email
+
     @Query("select * from Doctor order by doctorId")
     LiveData<List<Doctor>> getAllDoctors();
 }

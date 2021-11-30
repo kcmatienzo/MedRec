@@ -19,6 +19,9 @@ public interface AdminDao {
     @Query("SELECT * FROM Admin WHERE adminId = :adminId")
     Admin findByAdminId(int adminId); // find patient based on adminId
 
+    @Query("SELECT * FROM Admin WHERE email = :email")
+    Admin findByAdminEmail(String email); // find patient based on adminId
+
     @Query("select * from Admin order by adminId")
     LiveData<List<Admin>> getAllAdministrators();
 }

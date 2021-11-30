@@ -37,4 +37,7 @@ public class AdminViewModel extends AndroidViewModel {
 
 //    // Create a wrapper findByAdminId() method that calls the Repository’s findByAdminId() method
     public Admin findByAdminId(int adminId) { return adminRepository.findByAdminId(adminId); }
+
+    // Create a wrapper findByAdminEmail() method that calls the Repository’s findByAdminEmail() method
+    public Admin findByAdminEmail(String email) { return adminRepository.findByAdminEmail(email); }
 }

@@ -38,6 +38,9 @@ public class AdminRepository {
 //    // Find admin, this is called from ViewModel
     public Admin findByAdminId(int adminId) { return adminDao.findByAdminId(adminId); }
 
+    // Create a wrapper findByAdminEmail() method that calls the Repository’s findByAdminEmail() method
+    public Admin findByAdminEmail(String email) { return adminDao.findByAdminEmail(email); }
+
     //inserts a person asynchronously
     public void insert(Admin admin) {
         insertAsync(admin);

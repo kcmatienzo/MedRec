@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public interface PatientDao {
 
     @Query("SELECT * FROM Patient WHERE healthcardNumber = :healthcardNumber")
     Patient findByPatientHealthcard(String healthcardNumber); // find patient based on healthcard number
+
+    @Query("SELECT * FROM Patient WHERE email = :email")
+    Patient findByPatientEmail(String email); // find patient based on email
 
     //Monitoring Query Result Changes with Live Data
     @Query("select * from Patient order by patientId")

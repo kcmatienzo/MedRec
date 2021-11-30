@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.example.medrecroomdb.PatientRepository;
 import com.example.medrecroomdb.model.Admin;
+import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
 import java.util.List;
 
@@ -37,4 +38,8 @@ public class PatientViewModel extends AndroidViewModel {
     // Create a wrapper findByPatientId() method that calls the Repository’s findByPatientId() method
     public Patient findByHealthcardNumber(String healthcardNumber) {
         return patientRepository.findByHealthcardNumber(healthcardNumber); }
+
+    // Create a wrapper findByPatientEmail() method that calls the Repository’s findByPatientEmail() method
+    public Patient findByPatientEmail(String email) { return patientRepository.findByPatientEmail(email); }
+
 }

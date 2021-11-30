@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.medrecroomdb.dao.PatientDao;
 import com.example.medrecroomdb.db.MedRecDb;
 import com.example.medrecroomdb.model.Admin;
+import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
 
 import java.util.List;
@@ -46,6 +47,9 @@ public class PatientRepository {
 
     // Find patient's healthcard number, this is called from ViewModel
     public Patient findByHealthcardNumber(String healthcardNumber) { return patientDao.findByPatientHealthcard(healthcardNumber); }
+
+    // Create a wrapper findByPatientEmail() method that calls the Repository’s findByPatientEmail() method
+    public Patient findByPatientEmail(String email) { return patientDao.findByPatientEmail(email); }
 
     private void insertAsync(final Patient patient) {
 

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private AdminViewModel adminViewModel;
     EditText editTextId, editTextPassword;
     Button buttonLogin;
+    String role = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,33 +67,34 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View v) {
                 try {
                     // get doctorId, password from EditText
-                    int userId = Integer.parseInt(editTextId.getText().toString());
+                    String userName = editTextId.getText().toString();
                     String password = editTextPassword.getText().toString();
 
 
                     // Set up variable doctor references of Type Doctor to find doctor by doctorId by findByDoctorId()
-                    Doctor doctor = doctorViewModel.findByDoctorId(userId);
+                    Doctor doctor = doctorViewModel.findByDoctorEmail(userName);
 
                     // Set up variable doctor references of Type Doctor to find doctor by doctorId by findByDoctorId()
-                    Patient patient = patientViewModel.findByPatientId(userId);
+                    Patient patient = patientViewModel.findByPatientEmail(userName);
 
                     // Set up variable doctor references of Type Doctor to find doctor by doctorId by findByDoctorId()
-                    Admin admin = adminViewModel.findByAdminId(userId);
+                    Admin admin = adminViewModel.findByAdminEmail(userName);
 
                     // Validate if nurseId and Password match the info in AppDatabase and if both are filled, return successful result
-                    if (doctor != null && doctor.getDoctorId() == userId && doctor.getPassword().equals(password)) {
+                    if (doctor != null && doctor.getEmail().equals(userName) && doctor.getPassword().equals(password) && role == "Doctor") {
                         Intent intentDoctor = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
                         startActivity(intentDoctor);
-
-                    } else if (patient != null && patient.getPatientId() == userId && patient.getPassword().equals(password)) {
+                    }
+                    else if (patient != null && patient.getEmail().equals(userName) && patient.getPassword().equals(password)) {
                         Intent intentPatient = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
                         startActivity(intentPatient);
-                    } else if (admin != null && admin.getAdminId() == userId && admin.getPassword().equals(password)) {
+                    } else if (admin != null && admin.getEmail().equals(userName)&& admin.getPassword().equals(password)) {
                         Intent intentAdmin = new Intent(v.getContext(), AdminSearchUserActivity.class);
                         startActivity(intentAdmin);
-                    } else {
+                    }
+                    else {
                         // Otherwise, show error message
-                        Toast.makeText(getApplicationContext(), "Invalid username/password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Invalid username/password/role", Toast.LENGTH_SHORT).show();
                     }
                 } catch(Exception e) {
                     Toast.makeText(getApplicationContext(), "Please enter username and password.", Toast.LENGTH_SHORT).show();
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         switch(parent.getItemAtPosition(pos).toString())
         {
             case "Patient":
+                role = "Patient";
                 registerButton.setOnClickListener(new View.OnClickListener() {
                     //Implement the event handler method
                     public void onClick(View v) {
@@ -119,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 break;
             case "Doctor":
-
+                role = "Doctor";
                 registerButton.setOnClickListener(new View.OnClickListener() {
                     //Implement the event handler method
                     public void onClick(View v) {
@@ -129,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 });
                 break;
             case "Admin":
+                role = "Admin";
                 registerButton = (Button) findViewById(R.id.btnRegister);
                 registerButton.setOnClickListener(new View.OnClickListener() {
                     //Implement the event handler method
@@ -139,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 });
                 break;
             case "":
+
                 registerButton.setOnClickListener(new View.OnClickListener() {
                     //Implement the event handler method
                     public void onClick(View v) {

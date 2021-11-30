@@ -36,6 +36,9 @@ public class DoctorRepository {
     // Find doctor, this is called from ViewModel
     public Doctor findByDoctorId(int doctorId) { return doctorDao.findByDoctorId(doctorId); }
 
+    // Create a wrapper findByDoctorEmail() method that calls the Repository’s findByDoctorId() method
+    public Doctor findByDoctorEmail(String email) { return doctorDao.findByDoctorEmail(email); }
+
     //inserts a person asynchronously
     public void insert(Doctor doctor) {
         insertAsync(doctor);
