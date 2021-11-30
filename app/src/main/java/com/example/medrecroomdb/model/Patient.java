@@ -4,8 +4,10 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(indices = {@Index(value = {"healthcardNumber", "email"},
+@Entity(indices = {@Index(value = {"healthcardNumber"},
+        unique = true), @Index(value = {"email"},
         unique = true)})
+
 public class Patient {
     @PrimaryKey
     private int patientId;
