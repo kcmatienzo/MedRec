@@ -18,7 +18,7 @@ import com.example.medrecroomdb.activity.DoctorActivity;
 import com.example.medrecroomdb.activity.PatientActivity;
 import com.example.medrecroomdb.activity.DoctorSearchPatientActivity;
 import com.example.medrecroomdb.activity.AdminSearchUserActivity;
-import com.example.medrecroomdb.activity.PatientViewRecordActivity;
+import com.example.medrecroomdb.activity.PatientNavActivity;
 import com.example.medrecroomdb.model.Admin;
 import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Intent intentDoctor = new Intent(v.getContext(), DoctorSearchPatientActivity.class);
                         startActivity(intentDoctor);
                     } else if (patient != null && patient.getEmail().equals(userName) && patient.getPassword().equals(password) && role == "Patient") {
-                        Intent intentPatient = new Intent(v.getContext(), PatientViewRecordActivity.class);
+                        Intent intentPatient = new Intent(v.getContext(), PatientNavActivity.class);
                         startActivity(intentPatient);
                     } else if (admin != null && admin.getEmail().equals(userName)&& admin.getPassword().equals(password) && role == "Admin") {
                         Intent intentAdmin = new Intent(v.getContext(), AdminSearchUserActivity.class);

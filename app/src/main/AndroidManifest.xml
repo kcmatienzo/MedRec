@@ -31,7 +31,10 @@
             android:name=".activity.AdminSearchResultsActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.PatientViewRecordActivity"
+            android:name=".activity.PatientNavActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PatientViewMedRecActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(indices = {@Index(value = {"employeeId"},
+@Entity(indices = {@Index(value = {"employeeId", "email"},
         unique = true)})
 public class Admin {
     @PrimaryKey
