@@ -24,7 +24,6 @@ public class DoctorSearchPatientActivity extends AppCompatActivity {
     private PatientViewModel patientViewModel;
     private Button btnSearchPatient;
     private EditText editText_pHealthcardNumber;
-    Patient patient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

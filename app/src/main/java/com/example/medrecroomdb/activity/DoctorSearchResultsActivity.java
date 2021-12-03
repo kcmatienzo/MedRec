@@ -26,7 +26,6 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
     private TextView fNameTxtView, lNameTxtView, addrTxtView, healthcardTxtView, phoneTxtView, emailTxtView, medicalTxtView;
     Patient patient;
     String healthcard;
-    String healthcardNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,6 @@ public class DoctorSearchResultsActivity extends AppCompatActivity {
         try{
             Intent intent=getIntent();
             healthcard = intent.getStringExtra("healthcardNumber");
-            healthcardNum = healthcard;
             patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
             patient = patientViewModel.findByHealthcardNumber(healthcard);
             if (patient != null)

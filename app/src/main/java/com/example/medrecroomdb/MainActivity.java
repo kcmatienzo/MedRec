@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         startActivity(intentDoctor);
                     } else if (patient != null && patient.getEmail().equals(userName) && patient.getPassword().equals(password) && role == "Patient") {
                         Intent intentPatient = new Intent(v.getContext(), PatientNavActivity.class);
+                        intentPatient.putExtra("userName", userName);
                         startActivity(intentPatient);
                     } else if (admin != null && admin.getEmail().equals(userName)&& admin.getPassword().equals(password) && role == "Admin") {
                         Intent intentAdmin = new Intent(v.getContext(), AdminSearchUserActivity.class);
