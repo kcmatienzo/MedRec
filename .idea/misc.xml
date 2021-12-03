@@ -17,16 +17,12 @@
         <entry key="..\:/Users/KC/Documents/Fall2021/COMP231/MedRec/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/KC/Documents/Fall2021/COMP231/MedRec/app/src/main/res/layout/activity_patient.xml" value="0.4" />
         <entry key="..\:/Users/KC/Documents/Fall2021/COMP231/MedRec/app/src/main/res/layout/activity_patient_menu.xml" value="0.3046875" />
+        <entry key="..\:/Users/KC/Documents/Fall2021/COMP231/MedRec/app/src/main/res/layout/activity_patient_nav.xml" value="0.4817708333333333" />
         <entry key="..\:/Users/KC/Documents/Fall2021/COMP231/MedRec/app/src/main/res/layout/activity_patient_viewmedrec.xml" value="0.6" />
-        <entry key="..\:/Users/Owner/Documents/GitHub/MedRec/app/src/main/res/layout/activity_admin_searchresults.xml" value="0.21808510638297873" />
-        <entry key="..\:/Users/Owner/Documents/GitHub/MedRec/app/src/main/res/layout/activity_admin_searchuser.xml" value="0.3307291666666667" />
-        <entry key="..\:/Users/Owner/Documents/GitHub/MedRec/app/src/main/res/layout/activity_doctor.xml" value="0.3307291666666667" />
-        <entry key="..\:/Users/Owner/Documents/GitHub/MedRec/app/src/main/res/layout/activity_doctor_searchpatient.xml" value="0.3307291666666667" />
-        <entry key="..\:/Users/Owner/Documents/GitHub/MedRec/app/src/main/res/layout/activity_doctor_searchresults.xml" value="0.3307291666666667" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

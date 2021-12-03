@@ -1,4 +1,5 @@
 package com.example.medrecroomdb.activity;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -20,32 +23,43 @@ import java.util.List;
 public class DoctorSearchResultsActivity extends AppCompatActivity {
 
     private PatientViewModel patientViewModel;
-    private TextView fNameTextView, lNameTextView, addrTextView, healthcardTextView, phoneTextView, emailTextView, medicalTextView;
+    private TextView fNameTxtView, lNameTxtView, addrTxtView, healthcardTxtView, phoneTxtView, emailTxtView, medicalTxtView;
     Patient patient;
     String healthcard;
+    String healthcardNum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_searchresults);
-        patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
-        healthcard = getIntent().getStringExtra("healthcard");
-        patient = patientViewModel.findByHealthcardNumber(healthcard);
-        if (patient != null)
-        {
-            fNameTextView = findViewById(R.id.fNameTextView);
-            fNameTextView.setText(patient.getFirstName());
-            lNameTextView = findViewById(R.id.lNameTextView);
-            lNameTextView.setText(patient.getLastName());
-            addrTextView = findViewById(R.id.addrTextView);
-            addrTextView.setText(patient.getEmail());
-            healthcardTextView = findViewById(R.id.healthcardTextView);
-            healthcardTextView.setText(patient.getHealthcardNumber());
-            phoneTextView = findViewById(R.id.phoneTextView);
-            phoneTextView.setText(patient.getEmail());
-            emailTextView = findViewById(R.id.emailTextView);
-            emailTextView.setText(patient.getEmail());
-            medicalTextView = findViewById(R.id.medicalTextView);
-            medicalTextView.setText(patient.getEmail());
+        try{
+            Intent intent=getIntent();
+            healthcard = intent.getStringExtra("healthcardNumber");
+            healthcardNum = healthcard;
+            patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
+            patient = patientViewModel.findByHealthcardNumber(healthcard);
+            if (patient != null)
+            {
+                fNameTxtView = findViewById(R.id.fNameTextView);
+                fNameTxtView.setText(patient.getFirstName());
+                lNameTxtView = findViewById(R.id.lNameTextView);
+                lNameTxtView.setText(patient.getLastName());
+                addrTxtView = findViewById(R.id.addrTextView);
+                addrTxtView.setText(patient.getEmail());
+                healthcardTxtView = findViewById(R.id.healthcardTextView);
+                healthcardTxtView.setText(patient.getHealthcardNumber());
+                phoneTxtView = findViewById(R.id.phoneTextView);
+                phoneTxtView.setText(patient.getEmail());
+                emailTxtView = findViewById(R.id.emailTextView);
+                emailTxtView.setText(patient.getEmail());
+                medicalTxtView = findViewById(R.id.medicalTextView);
+                medicalTxtView.setText(patient.getEmail());
+            }
         }
+        catch(Exception e)
+        {
+            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

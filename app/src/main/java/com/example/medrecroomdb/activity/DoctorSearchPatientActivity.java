@@ -50,6 +50,8 @@ public class DoctorSearchPatientActivity extends AppCompatActivity {
                     // Validate if nurseId and Password match the info in AppDatabase and if both are filled, return successful result
                     if (patient != null && patient.getHealthcardNumber().equals(healthcardNumber)){
                         Intent intentSearchResult = new Intent(v.getContext(), DoctorSearchResultsActivity.class);
+                        intentSearchResult.putExtra("healthcardNumber", healthcardNumber);
+                        Toast.makeText(getApplicationContext(), healthcardNumber, Toast.LENGTH_SHORT).show();
                         startActivity(intentSearchResult);
                     } else {
                         // Otherwise, show error message
