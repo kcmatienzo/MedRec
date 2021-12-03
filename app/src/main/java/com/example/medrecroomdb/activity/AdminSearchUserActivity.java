@@ -41,7 +41,6 @@ public class AdminSearchUserActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String strUserId = editText_searchUserId.getText().toString();
-                Log.d("MYVALUE", "onClick: " + strUserId);
                 if(strUserId.equals("")){
                     Toast.makeText(getApplicationContext(), "Enter Valid User ID", Toast.LENGTH_SHORT).show();
                     return;
