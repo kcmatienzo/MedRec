@@ -19,6 +19,8 @@ import com.example.medrecroomdb.viewmodel.PatientViewModel;
 public class AdminSearchUserActivity extends AppCompatActivity {
     // Declare variables
     private Button btnSearchUser;
+    private Button btnAddPatient;
+    private Button btnAddDoctor;
     private EditText editText_searchUserId;
     PatientViewModel patientViewModel;
     DoctorViewModel doctorViewModel;
@@ -30,6 +32,8 @@ public class AdminSearchUserActivity extends AppCompatActivity {
         patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
         doctorViewModel = ViewModelProviders.of(this).get(DoctorViewModel.class);
         btnSearchUser = findViewById(R.id.button_searchUser);
+        btnAddPatient = findViewById(R.id.btnAdminSearchAddPatient);
+        btnAddDoctor = findViewById(R.id.btnAdminSearchAddDoctor);
         editText_searchUserId = findViewById(R.id.editText_searchUserId);
         // Set up click listener for Search Button
         btnSearchUser.setOnClickListener(new View.OnClickListener() {
@@ -73,5 +77,22 @@ public class AdminSearchUserActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnAddPatient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), PatientActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnAddDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), DoctorActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
