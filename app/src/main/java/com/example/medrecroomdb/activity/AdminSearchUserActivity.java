@@ -27,7 +27,7 @@ public class AdminSearchUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_searchuser);
         // Set up references
         patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
-        //doctorViewModel = ViewModelProviders.of(this).get(DoctorViewModel.class);
+        doctorViewModel = ViewModelProviders.of(this).get(DoctorViewModel.class);
         btnSearchUser = findViewById(R.id.button_searchUser);
         editText_searchUserId = findViewById(R.id.editText_searchUserId);
         // Set up click listener for Search Button
@@ -41,7 +41,7 @@ public class AdminSearchUserActivity extends AppCompatActivity {
 
                     // Set up variable doctor references of Type Doctor to find doctor by doctorId by findByHealthcardNumber()
                     Patient patient = patientViewModel.findByPatientId(userId);
-                    //Doctor doctor = doctorViewModel.findByDoctorId(userId);
+                    Doctor doctor = doctorViewModel.findByDoctorId(userId);
                     // Validate if nurseId and Password match the info in AppDatabase and if both are filled, return successful result
                     if (patient != null){
                         Intent intentSearchResult = new Intent(v.getContext(), AdminSearchResultsActivity.class);
@@ -49,12 +49,12 @@ public class AdminSearchUserActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), userId.toString(), Toast.LENGTH_SHORT).show();
                         startActivity(intentSearchResult);
                     }
-//                    else if (doctor != null && doctor.getDoctorId() == userId)
-//                    {
-//                        Intent intentSearchResult = new Intent(v.getContext(), AdminSearchResultsActivity.class);
-//                        intentSearchResult.putExtra("userId", userId);
-//                        startActivity(intentSearchResult);
-//                    }
+                    else if (doctor != null && doctor.getDoctorId() == userId)
+                    {
+                        Intent intentSearchResult = new Intent(v.getContext(), AdminSearchResultsActivity.class);
+                        intentSearchResult.putExtra("userId", userId.toString());
+                        startActivity(intentSearchResult);
+                    }
                     else {
                         // Otherwise, show error message
                         Toast.makeText(getApplicationContext(), "Invalid User ID.", Toast.LENGTH_SHORT).show();
