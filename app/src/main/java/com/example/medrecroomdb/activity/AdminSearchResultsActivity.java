@@ -22,6 +22,7 @@ public class AdminSearchResultsActivity extends AppCompatActivity {
     Integer id;
     private EditText editText_UserId, editText_firstName, editText_lastName, editText_address, editText_email, editText_phoneNumber;
     private Button btnUpdateUser;
+    private String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class AdminSearchResultsActivity extends AppCompatActivity {
             doctor = doctorViewModel.findByDoctorId(id);
             if (patient != null)
             {
-
+                userType = "patient";
                 editText_UserId = findViewById(R.id.editText_UserId);
                 editText_UserId.setText(String.valueOf(patient.getPatientId()));
                 editText_firstName = findViewById(R.id.editText_firstName);
@@ -53,8 +54,16 @@ public class AdminSearchResultsActivity extends AppCompatActivity {
                 editText_email.setText(patient.getEmail());
                 editText_phoneNumber = findViewById(R.id.editText_phoneNumber);
                 editText_phoneNumber.setText(patient.getEmail());
-            }else{
 
+                editText_UserId.setEnabled(false);
+                editText_firstName.setEnabled(false);
+                editText_lastName.setEnabled(false);
+                editText_address.setEnabled(false);
+                editText_email.setEnabled(false);
+                editText_phoneNumber.setEnabled(false);
+
+            }else{
+                userType = "doctor";
                 editText_UserId = findViewById(R.id.editText_UserId);
                 editText_UserId.setText(String.valueOf(doctor.getDoctorId()));
                 editText_firstName = findViewById(R.id.editText_firstName);
@@ -67,6 +76,13 @@ public class AdminSearchResultsActivity extends AppCompatActivity {
                 editText_email.setText(doctor.getEmail());
                 editText_phoneNumber = findViewById(R.id.editText_phoneNumber);
                 editText_phoneNumber.setText(doctor.getEmail());
+
+                editText_UserId.setEnabled(false);
+                editText_firstName.setEnabled(false);
+                editText_lastName.setEnabled(false);
+                editText_address.setEnabled(false);
+                editText_email.setEnabled(false);
+                editText_phoneNumber.setEnabled(false);
             }
         }
         catch(Exception e)
@@ -79,6 +95,7 @@ public class AdminSearchResultsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentSearchResult = new Intent(view.getContext(), UpdateUserActivity.class);
                 intentSearchResult.putExtra("userId", id.toString());
+                intentSearchResult.putExtra("userType", userType);
                 startActivity(intentSearchResult);
             }
         });
