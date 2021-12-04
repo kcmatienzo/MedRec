@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.medrecroomdb.model.Doctor;
 import com.example.medrecroomdb.model.Patient;
@@ -15,6 +16,9 @@ import java.util.List;
 public interface PatientDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     void insert(Patient Patient);
+
+    @Update
+    void update(Patient patient);
 
     @Query("SELECT * FROM Patient WHERE patientId = :patientId")
     Patient findByPatientId(int patientId); // find patient based on patientId

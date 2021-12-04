@@ -42,4 +42,8 @@ public class PatientViewModel extends AndroidViewModel {
     // Create a wrapper findByPatientEmail() method that calls the Repository’s findByPatientEmail() method
     public Patient findByPatientEmail(String email) { return patientRepository.findByPatientEmail(email); }
 
+    // update data in repository
+    public void update(Patient patient) {
+        patientRepository.update(patient);
+    }
 }

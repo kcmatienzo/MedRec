@@ -90,30 +90,34 @@ public class UpdateUserActivity extends AppCompatActivity {
                     if(userType.equals("patient")){
                         Patient updatedPatient = new Patient();
 
+                        updatedPatient.setPatientId(id);
+                        updatedPatient.setHealthcardNumber(patient.getHealthcardNumber());
+                        updatedPatient.setPassword(patient.getPassword());
+
                         updatedPatient.setFirstName(firstName);
                         updatedPatient.setLastName(lastName);
                         updatedPatient.setEmail(email);
 
-                        //patientViewModel.update(updatedPatient);
+                        patientViewModel.update(updatedPatient);
+                        finish();
 
                     }
                     else if(userType.equals("doctor")){
                         Doctor updatedDoctor = new Doctor();
 
-                        updatedDoctor.setFirstName(firstName);
-                        updatedDoctor.setLastName(lastName);
-                        updatedDoctor.setEmail(email);
                         updatedDoctor.setDoctorId(id);
                         updatedDoctor.setPassword(doctor.getPassword());
                         updatedDoctor.setDoctorLicenseNumber(doctor.getDoctorLicenseNumber());
 
+                        updatedDoctor.setFirstName(firstName);
+                        updatedDoctor.setLastName(lastName);
+                        updatedDoctor.setEmail(email);
+
+
                         doctorViewModel.update(updatedDoctor);
                         finish();
 
-
                     }
-                    Toast.makeText(getApplicationContext(),"User Has Been Updated",Toast.LENGTH_LONG);
-
 
 
                 }catch(Exception e){

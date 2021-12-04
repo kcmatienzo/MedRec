@@ -1,10 +1,12 @@
 package com.example.medrecroomdb;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.medrecroomdb.dao.DoctorDao;
 import com.example.medrecroomdb.dao.PatientDao;
 import com.example.medrecroomdb.db.MedRecDb;
 import com.example.medrecroomdb.model.Admin;
@@ -64,5 +66,28 @@ public class PatientRepository {
                 }
             }
         }).start();
+    }
+
+
+    //updates patient asynchronously
+    public void update(Patient patient) {
+        new PatientRepository.UpdatePatientAsyncTask(patientDao).execute(patient);
+    }
+
+    // async task to update Doctor
+    private static class UpdatePatientAsyncTask extends AsyncTask<Patient, Void, Void> {
+        private PatientDao dao;
+
+        private UpdatePatientAsyncTask(PatientDao dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Patient... models) {
+            // below line is use to update
+            // our modal in dao.
+            dao.update(models[0]);
+            return null;
+        }
     }
 }
