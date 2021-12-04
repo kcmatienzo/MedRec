@@ -28,6 +28,29 @@ public class AdminSearchResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_searchresults);
+
+        populateFields();
+
+        btnUpdateUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSearchResult = new Intent(view.getContext(), UpdateUserActivity.class);
+                intentSearchResult.putExtra("userId", id.toString());
+                intentSearchResult.putExtra("userType", userType);
+                startActivity(intentSearchResult);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        populateFields();
+
+    }
+
+    public void populateFields(){
         btnUpdateUser = findViewById(R.id.btnAdminSearchResultsUpdateUser);
 
 
@@ -89,15 +112,5 @@ public class AdminSearchResultsActivity extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
-
-        btnUpdateUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentSearchResult = new Intent(view.getContext(), UpdateUserActivity.class);
-                intentSearchResult.putExtra("userId", id.toString());
-                intentSearchResult.putExtra("userType", userType);
-                startActivity(intentSearchResult);
-            }
-        });
     }
 }

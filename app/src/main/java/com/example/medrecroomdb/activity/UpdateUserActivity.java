@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class UpdateUserActivity extends AppCompatActivity {
     Patient patient;
     Doctor doctor;
     private EditText editText_UserId, editText_firstName, editText_lastName, editText_address, editText_email, editText_phoneNumber;
+    Button btnConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,9 @@ public class UpdateUserActivity extends AppCompatActivity {
         editText_address = findViewById(R.id.editTextUpdateUserAddress);
         editText_email = findViewById(R.id.editTextUpdateUserEmail);
         editText_phoneNumber = findViewById(R.id.editTextUpdateUserPhoneNumber);
+        btnConfirm = findViewById(R.id.btnUpdateUserConfirm);
+
+        editText_UserId.setEnabled(false);
 
         if(userType.equals("patient")){
             patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
@@ -53,6 +59,7 @@ public class UpdateUserActivity extends AppCompatActivity {
             editText_address.setText(patient.getEmail());
             editText_email.setText(patient.getEmail());
             editText_phoneNumber.setText(patient.getEmail());
+
         }
         else if(userType.equals("doctor")){
             doctorViewModel= ViewModelProviders.of(this).get(DoctorViewModel.class);
@@ -64,10 +71,56 @@ public class UpdateUserActivity extends AppCompatActivity {
             editText_address.setText(doctor.getEmail());
             editText_email.setText(doctor.getEmail());
             editText_phoneNumber.setText(doctor.getEmail());
+
         }else {
             Toast.makeText(getApplicationContext(), "Could Not Find User", Toast.LENGTH_SHORT).show();
         }
 
-        Toast.makeText(getApplicationContext(), strId, Toast.LENGTH_SHORT).show();
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String firstName = editText_firstName.getText().toString();
+                String lastName = editText_lastName.getText().toString();
+                String email = editText_email.getText().toString();
+                String address = editText_email.getText().toString();
+                String phoneNumber = editText_email.getText().toString();
+
+                try{
+                    if(userType.equals("patient")){
+                        Patient updatedPatient = new Patient();
+
+                        updatedPatient.setFirstName(firstName);
+                        updatedPatient.setLastName(lastName);
+                        updatedPatient.setEmail(email);
+
+                        //patientViewModel.update(updatedPatient);
+
+                    }
+                    else if(userType.equals("doctor")){
+                        Doctor updatedDoctor = new Doctor();
+
+                        updatedDoctor.setFirstName(firstName);
+                        updatedDoctor.setLastName(lastName);
+                        updatedDoctor.setEmail(email);
+                        updatedDoctor.setDoctorId(id);
+                        updatedDoctor.setPassword(doctor.getPassword());
+                        updatedDoctor.setDoctorLicenseNumber(doctor.getDoctorLicenseNumber());
+
+                        doctorViewModel.update(updatedDoctor);
+                        finish();
+
+
+                    }
+                    Toast.makeText(getApplicationContext(),"User Has Been Updated",Toast.LENGTH_LONG);
+
+
+
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(),e.getMessage().toString(),Toast.LENGTH_LONG);
+                }
+
+            }
+        });
     }
 }
