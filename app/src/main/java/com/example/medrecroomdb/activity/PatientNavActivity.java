@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -21,6 +22,8 @@ public class PatientNavActivity extends AppCompatActivity {
     private PatientViewModel patientViewModel;
     private Button button_viewMedRec, button_updateInfo, button_bookAppt;
     String userName;
+    //String strId;
+    Integer id;
     Patient patient;
 
     @Override
@@ -31,9 +34,11 @@ public class PatientNavActivity extends AppCompatActivity {
         Intent intent=getIntent();
         userName = intent.getStringExtra("userName");
 
+
+
         patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
         patient = patientViewModel.findByPatientEmail(userName);
-
+        id = patient.getPatientId();
 
         button_viewMedRec = findViewById(R.id.btn_viewMedicalRecord);
         button_updateInfo = findViewById(R.id.btn_updateInfo);
@@ -51,7 +56,10 @@ public class PatientNavActivity extends AppCompatActivity {
         button_updateInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentViewMedRec = new Intent(v.getContext(), PatientViewMedRecActivity.class);
+                Intent intentViewMedRec = new Intent(v.getContext(), AdminSearchResultsActivity.class);
+                intentViewMedRec.putExtra("userType", "patient");
+                intentViewMedRec.putExtra("userId", id.toString());
+//                Toast.makeText(getApplicationContext(), id.toString(), Toast.LENGTH_SHORT).show();
                 startActivity(intentViewMedRec);
             }
         });

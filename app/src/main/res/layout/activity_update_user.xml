@@ -108,12 +108,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Phone Number:" />
+
             <EditText
                 android:id="@+id/editTextUpdateUserPhoneNumber"
                 android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textSize="16sp" />
         </TableRow>
     </TableLayout>

@@ -28,7 +28,7 @@ public class PatientActivity extends AppCompatActivity {
 
     private PatientViewModel patientViewModel;
     private Button btnAddPatient;
-    private EditText etPatientFirstName, etPatientLastName, etPatientEmail, etPatientHealthcardNumber, etPassword;
+    private EditText etPatientFirstName, etPatientLastName, etPatientAddress, etPatientEmail, etPatientPhoneNumber, etPatientHealthcardNumber, etPassword;
     Patient patient;
 
     boolean allFieldsChecked = false;
@@ -41,7 +41,9 @@ public class PatientActivity extends AppCompatActivity {
 
         etPatientFirstName = findViewById(R.id.txtPatientFirstName);
         etPatientLastName = findViewById(R.id.txtPatientLastName);
+        etPatientAddress = findViewById(R.id.txtPatientAddress);
         etPatientEmail = findViewById(R.id.txtPatientEmail);
+        etPatientPhoneNumber = findViewById(R.id.txtPatientPhoneNumber);
         etPatientHealthcardNumber = findViewById(R.id.txtpatientHealthcard);
         etPassword = findViewById(R.id.txtPassword);
 
@@ -72,35 +74,54 @@ public class PatientActivity extends AppCompatActivity {
                     TableRow row = new TableRow(getApplicationContext());
                     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                     lp.weight = 1;
-                    lp.setMargins(10, 5, 10, 5);
+                    //lp.setMargins(10, 5, 10, 5);
+
                     row.setLayoutParams(lp);
 
                     TextView id = new TextView(getApplicationContext());
+                    id.setTextSize(10);
                     id.setLayoutParams(lp);
                     id.setText(String.valueOf(patient.getPatientId()));
                     row.addView(id);
 
                     TextView firstName = new TextView(getApplicationContext());
+                    firstName.setTextSize(10);
                     firstName.setLayoutParams(lp);
                     firstName.setText(patient.getFirstName());
                     row.addView(firstName);
 
                     TextView lastName = new TextView(getApplicationContext());
+                    lastName.setTextSize(10);
                     lastName.setLayoutParams(lp);
                     lastName.setText(patient.getLastName());
                     row.addView(lastName);
 
+                    TextView address = new TextView(getApplicationContext());
+                    address.setTextSize(10);
+                    address.setLayoutParams(lp);
+                    address.setText(patient.getAddress());
+                    row.addView(address);
+
                     TextView department = new TextView(getApplicationContext());
-                    department.setLayoutParams(lp);
+                    department.setTextSize(10);
+                    //department.setLayoutParams(lp);
                     department.setText(patient.getEmail());
                     row.addView(department);
 
+                    TextView phone = new TextView(getApplicationContext());
+                    phone.setTextSize(10);
+                    phone.setLayoutParams(lp);
+                    phone.setText(String.valueOf(patient.getPhoneNumber()));
+                    row.addView(phone);
+
                     TextView professorId = new TextView(getApplicationContext());
+                    professorId.setTextSize(10);
                     professorId.setLayoutParams(lp);
                     professorId.setText(String.valueOf(patient.getHealthcardNumber()));
                     row.addView(professorId);
 
                     TextView classroom = new TextView(getApplicationContext());
+                    classroom.setTextSize(10);
                     classroom.setLayoutParams(lp);
                     classroom.setText(String.valueOf(patient.getPassword()));
                     row.addView(classroom);
@@ -124,7 +145,11 @@ public class PatientActivity extends AppCompatActivity {
 
                     patient.setLastName(etPatientLastName.getText().toString());
 
+                    patient.setAddress(etPatientAddress.getText().toString());
+
                     patient.setEmail(etPatientEmail.getText().toString());
+
+                    patient.setPhoneNumber(Integer.parseInt(etPatientPhoneNumber.getText().toString()));
 
                     patient.setHealthcardNumber(etPatientHealthcardNumber.getText().toString());
 
@@ -134,7 +159,9 @@ public class PatientActivity extends AppCompatActivity {
 
                     etPatientFirstName.setText("");
                     etPatientLastName.setText("");
+                    etPatientAddress.setText("");
                     etPatientEmail.setText("");
+                    etPatientPhoneNumber.setText("");
                     etPatientHealthcardNumber.setText("");
                     etPassword.setText("");
                 }
@@ -144,32 +171,46 @@ public class PatientActivity extends AppCompatActivity {
 
     // function to check all text fields
     private boolean CheckAllFields() {
-        if (etPatientFirstName.length() == 0) {
+        try {
+            if (etPatientFirstName.length() == 0) {
             etPatientFirstName.setError("This field is required");
             return false;
+            }
+            if (etPatientLastName.length() == 0) {
+                etPatientLastName.setError("This field is required");
+                return false;
+            }
+            if (etPatientEmail.length() == 0) {
+                etPatientEmail.setError("This field is required");
+                return false;
+            }
+            if (etPatientAddress.length() == 0) {
+                etPatientAddress.setError("This field is required");
+                return false;
+            }
+            if (!Patterns.EMAIL_ADDRESS.matcher(etPatientEmail.getText().toString()).matches()) {
+                etPatientEmail.setError("Please enter a valid email");
+                return false;
+            }
+            if (etPatientPhoneNumber.length() == 0) {
+                etPatientPhoneNumber.setError("This field is required");
+                return false;
+            }
+            if (etPatientHealthcardNumber.length() == 0) {
+                etPatientHealthcardNumber.setError("This field is required");
+                return false;
+            }
+            if (etPassword.length() == 0) {
+                etPassword.setError("This field is required");
+                return false;
+            } else if (etPassword.length() < 8) {
+                etPassword.setError("Password must be minimum 8 characters");
+                return false;
+            }
+
         }
-        if (etPatientLastName.length() == 0) {
-            etPatientLastName.setError("This field is required");
-            return false;
-        }
-        if (etPatientEmail.length() == 0) {
-            etPatientEmail.setError("This field is required");
-            return false;
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(etPatientEmail.getText().toString()).matches()) {
-            etPatientEmail.setError("Please enter a valid email");
-            return false;
-        }
-        if (etPatientHealthcardNumber.length() == 0) {
-            etPatientHealthcardNumber.setError("This field is required");
-            return false;
-        }
-        if (etPassword.length() == 0) {
-            etPassword.setError("This field is required");
-            return false;
-        } else if (etPassword.length() < 8) {
-            etPassword.setError("Password must be minimum 8 characters");
-            return false;
+        catch (Exception e) {
+            Toast.makeText(getApplicationContext(),e.getMessage().toString(),Toast.LENGTH_LONG);
         }
         return true;
     }

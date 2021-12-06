@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ public class UpdateUserActivity extends AppCompatActivity {
     private EditText editText_UserId, editText_firstName, editText_lastName, editText_address, editText_email, editText_phoneNumber;
     Button btnConfirm;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,8 @@ public class UpdateUserActivity extends AppCompatActivity {
 
         editText_UserId.setEnabled(false);
 
+
+
         if(userType.equals("patient")){
             patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
             patient = patientViewModel.findByPatientId(id);
@@ -56,9 +60,9 @@ public class UpdateUserActivity extends AppCompatActivity {
             editText_UserId.setText(String.valueOf(patient.getPatientId()));
             editText_firstName.setText(patient.getFirstName());
             editText_lastName.setText(patient.getLastName());
-            editText_address.setText(patient.getEmail());
+            editText_address.setText(patient.getAddress());
             editText_email.setText(patient.getEmail());
-            editText_phoneNumber.setText(patient.getEmail());
+            editText_phoneNumber.setText(String.valueOf(patient.getPhoneNumber()));
 
         }
         else if(userType.equals("doctor")){
@@ -80,11 +84,13 @@ public class UpdateUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                boolean allFieldsChecked = false;
                 String firstName = editText_firstName.getText().toString();
                 String lastName = editText_lastName.getText().toString();
                 String email = editText_email.getText().toString();
-                String address = editText_email.getText().toString();
-                String phoneNumber = editText_email.getText().toString();
+                String address = editText_address.getText().toString();
+                int phoneNumber = Integer.parseInt(editText_phoneNumber.getText().toString());
+
 
                 try{
                     if(userType.equals("patient")){
@@ -96,7 +102,9 @@ public class UpdateUserActivity extends AppCompatActivity {
 
                         updatedPatient.setFirstName(firstName);
                         updatedPatient.setLastName(lastName);
+                        updatedPatient.setAddress(address);
                         updatedPatient.setEmail(email);
+                        updatedPatient.setPhoneNumber(phoneNumber);
 
                         patientViewModel.update(updatedPatient);
                         finish();
@@ -113,18 +121,22 @@ public class UpdateUserActivity extends AppCompatActivity {
                         updatedDoctor.setLastName(lastName);
                         updatedDoctor.setEmail(email);
 
-
                         doctorViewModel.update(updatedDoctor);
                         finish();
 
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Could Not save", Toast.LENGTH_SHORT).show();
                     }
 
 
-                }catch(Exception e){
+                }
+                catch(Exception e){
                     Toast.makeText(getApplicationContext(),e.getMessage().toString(),Toast.LENGTH_LONG);
                 }
 
             }
         });
+
     }
+
 }
