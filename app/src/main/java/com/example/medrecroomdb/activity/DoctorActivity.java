@@ -28,7 +28,7 @@ public class DoctorActivity extends AppCompatActivity {
 
     private DoctorViewModel doctorViewModel;
     private Button btnAddDoctor;
-    private EditText etDoctorFirstName, etDoctorLastName, etDoctorEmail, etDoctorLicense, etPassword;
+    private EditText etDoctorFirstName, etDoctorLastName, etDoctorEmail, etDoctorLicense, etPassword, etDoctorAddress, etDoctorPhoneNumber;
     Doctor doctor;
 
     boolean allFieldsChecked = false;
@@ -41,6 +41,8 @@ public class DoctorActivity extends AppCompatActivity {
         etDoctorFirstName = findViewById(R.id.txtDoctorFirstName);
         etDoctorLastName = findViewById(R.id.txtDoctorLastName);
         etDoctorEmail = findViewById(R.id.txtDoctorEmail);
+        etDoctorAddress = findViewById(R.id.txtDoctorAddress);
+        etDoctorPhoneNumber = findViewById(R.id.txtDoctorPhoneNumber);
         etDoctorLicense = findViewById(R.id.txtDoctorLicense);
         etPassword = findViewById(R.id.txtPassword);
 
@@ -71,35 +73,52 @@ public class DoctorActivity extends AppCompatActivity {
                     TableRow row = new TableRow(getApplicationContext());
                     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                     lp.weight = 1;
-                    lp.setMargins(10, 5, 10, 5);
+                    //lp.setMargins(10, 5, 10, 5);
                     row.setLayoutParams(lp);
 
                     TextView id = new TextView(getApplicationContext());
+                    id.setTextSize(10);
                     id.setLayoutParams(lp);
                     id.setText(String.valueOf(doctor.getDoctorId()));
                     row.addView(id);
 
                     TextView firstName = new TextView(getApplicationContext());
+                    firstName.setTextSize(10);
                     firstName.setLayoutParams(lp);
                     firstName.setText(doctor.getFirstName());
                     row.addView(firstName);
 
                     TextView lastName = new TextView(getApplicationContext());
+                    lastName.setTextSize(10);
                     lastName.setLayoutParams(lp);
                     lastName.setText(doctor.getLastName());
                     row.addView(lastName);
 
                     TextView department = new TextView(getApplicationContext());
+                    department.setTextSize(10);
                     department.setLayoutParams(lp);
                     department.setText(doctor.getEmail());
                     row.addView(department);
 
+                    TextView address = new TextView(getApplicationContext());
+                    address.setTextSize(10);
+                    address.setLayoutParams(lp);
+                    address.setText(doctor.getAddress());
+                    row.addView(address);
+
+                    TextView phone = new TextView(getApplicationContext());
+                    phone.setTextSize(10);
+                    phone.setLayoutParams(lp);
+                    phone.setText(String.valueOf(doctor.getPhoneNumber()));
+                    row.addView(phone);
+
                     TextView professorId = new TextView(getApplicationContext());
-                    professorId.setLayoutParams(lp);
+                    professorId.setTextSize(10);
                     professorId.setText(String.valueOf(doctor.getDoctorLicenseNumber()));
                     row.addView(professorId);
 
                     TextView classroom = new TextView(getApplicationContext());
+                    classroom.setTextSize(10);
                     classroom.setLayoutParams(lp);
                     classroom.setText(String.valueOf(doctor.getPassword()));
                     row.addView(classroom);
@@ -123,6 +142,10 @@ public class DoctorActivity extends AppCompatActivity {
 
                     doctor.setLastName(etDoctorLastName.getText().toString());
 
+                    doctor.setAddress(etDoctorAddress.getText().toString());
+
+                    doctor.setPhoneNumber(Integer.parseInt(etDoctorPhoneNumber.getText().toString()));
+
                     doctor.setEmail(etDoctorEmail.getText().toString());
 
                     doctor.setDoctorLicenseNumber(etDoctorLicense.getText().toString());
@@ -134,6 +157,8 @@ public class DoctorActivity extends AppCompatActivity {
                     etDoctorFirstName.setText("");
                     etDoctorLastName.setText("");
                     etDoctorEmail.setText("");
+                    etDoctorAddress.setText("");
+                    etDoctorPhoneNumber.setText("");
                     etDoctorLicense.setText("");
                     etPassword.setText("");
                 }
@@ -158,6 +183,14 @@ public class DoctorActivity extends AppCompatActivity {
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(etDoctorEmail.getText().toString()).matches()) {
             etDoctorEmail.setError("Please enter a valid email");
+            return false;
+        }
+        if (etDoctorAddress.length() == 0) {
+            etDoctorAddress.setError("This field is required");
+            return false;
+        }
+        if (etDoctorPhoneNumber.length() == 0) {
+            etDoctorPhoneNumber.setError("This field is required");
             return false;
         }
         if (etDoctorLicense.length() == 0) {

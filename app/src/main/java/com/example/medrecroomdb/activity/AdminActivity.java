@@ -32,7 +32,7 @@ public class AdminActivity extends AppCompatActivity {
 
     private AdminViewModel adminViewModel;
     private Button btnAddAdmin;
-    private EditText etAdminFirstName, etAdminLastName, etAdminEmail, etAdminEmployeeNumber, etPassword;
+    private EditText etAdminFirstName, etAdminLastName, etAdminEmail, etAdminEmployeeNumber, etPassword, etAdminAddress, etAdminPhoneNumber;
     Admin admin;
 
     // one boolean to check all fields
@@ -46,6 +46,8 @@ public class AdminActivity extends AppCompatActivity {
         etAdminFirstName = findViewById(R.id.txtAdminFirstName);
         etAdminLastName = findViewById(R.id.txtAdminLastName);
         etAdminEmail = findViewById(R.id.txtAdminEmail);
+        etAdminAddress = findViewById(R.id.txtAdminAddress);
+        etAdminPhoneNumber = findViewById(R.id.txtAdminPhoneNumber);
         etAdminEmployeeNumber = findViewById(R.id.txtAdminEmployeeNumber);
         etPassword = findViewById(R.id.txtPassword);
 
@@ -78,35 +80,53 @@ public class AdminActivity extends AppCompatActivity {
                     TableRow row = new TableRow(getApplicationContext());
                     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                     lp.weight = 1;
-                    lp.setMargins(10, 5, 10, 5);
+                    //lp.setMargins(10, 5, 10, 5);
                     row.setLayoutParams(lp);
 
                     TextView id = new TextView(getApplicationContext());
+                    id.setTextSize(10);
                     id.setLayoutParams(lp);
                     id.setText(String.valueOf(admin.getAdminId()));
                     row.addView(id);
 
                     TextView firstName = new TextView(getApplicationContext());
+                    firstName.setTextSize(10);
                     firstName.setLayoutParams(lp);
                     firstName.setText(admin.getFirstName());
                     row.addView(firstName);
 
                     TextView lastName = new TextView(getApplicationContext());
+                    lastName.setTextSize(10);
                     lastName.setLayoutParams(lp);
                     lastName.setText(admin.getLastName());
                     row.addView(lastName);
 
+                    TextView address = new TextView(getApplicationContext());
+                    address.setTextSize(10);
+                    address.setLayoutParams(lp);
+                    address.setText(admin.getAddress());
+                    row.addView(address);
+
                     TextView department = new TextView(getApplicationContext());
+                    department.setTextSize(10);
                     department.setLayoutParams(lp);
                     department.setText(admin.getEmail());
                     row.addView(department);
 
                     TextView professorId = new TextView(getApplicationContext());
+                    professorId.setTextSize(10);
                     professorId.setLayoutParams(lp);
                     professorId.setText(String.valueOf(admin.getEmployeeId()));
                     row.addView(professorId);
 
+                    TextView phone = new TextView(getApplicationContext());
+                    phone.setTextSize(10);
+                    phone.setLayoutParams(lp);
+                    phone.setText(String.valueOf(admin.getPhoneNumber()));
+                    row.addView(phone);
+
                     TextView classroom = new TextView(getApplicationContext());
+                    classroom.setTextSize(10);
                     classroom.setLayoutParams(lp);
                     classroom.setText(String.valueOf(admin.getPassword()));
                     row.addView(classroom);
@@ -128,6 +148,10 @@ public class AdminActivity extends AppCompatActivity {
 
                     admin.setLastName(etAdminLastName.getText().toString());
 
+                    admin.setAddress(etAdminAddress.getText().toString());
+
+                    admin.setPhoneNumber(Integer.parseInt(etAdminPhoneNumber.getText().toString()));
+
                     admin.setEmail(etAdminEmail.getText().toString());
 
                     admin.setEmployeeId(etAdminEmployeeNumber.getText().toString());
@@ -139,6 +163,8 @@ public class AdminActivity extends AppCompatActivity {
                     etAdminFirstName.setText("");
                     etAdminLastName.setText("");
                     etAdminEmail.setText("");
+                    etAdminAddress.setText("");
+                    etAdminPhoneNumber.setText("");
                     etAdminEmployeeNumber.setText("");
                     etPassword.setText("");
                 }
@@ -163,6 +189,14 @@ public class AdminActivity extends AppCompatActivity {
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(etAdminEmail.getText().toString()).matches()) {
             etAdminEmail.setError("Please enter a valid email");
+            return false;
+        }
+        if (etAdminAddress.length() == 0) {
+            etAdminAddress.setError("This field is required");
+            return false;
+        }
+        if (etAdminPhoneNumber.length() == 0) {
+            etAdminPhoneNumber.setError("This field is required");
             return false;
         }
         if (etAdminEmployeeNumber.length() == 0) {

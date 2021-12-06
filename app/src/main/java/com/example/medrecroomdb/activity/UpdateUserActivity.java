@@ -63,7 +63,7 @@ public class UpdateUserActivity extends AppCompatActivity {
             editText_address.setText(patient.getAddress());
             editText_email.setText(patient.getEmail());
             editText_phoneNumber.setText(String.valueOf(patient.getPhoneNumber()));
-
+            Toast.makeText(getApplicationContext(), "U", Toast.LENGTH_SHORT).show();
         }
         else if(userType.equals("doctor")){
             doctorViewModel= ViewModelProviders.of(this).get(DoctorViewModel.class);

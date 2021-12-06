@@ -21,6 +21,10 @@ public class Admin {
     private String employeeId;
     @NonNull
     private String password;
+    @NonNull
+    private String address;
+    @NonNull
+    private int phoneNumber;
 
     public int getAdminId() {
         return adminId;
@@ -59,4 +63,18 @@ public class Admin {
 
     public String getPassword() {return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

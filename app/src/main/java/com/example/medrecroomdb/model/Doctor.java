@@ -16,6 +16,8 @@ public class Doctor {
     private String email;
     private String doctorLicenseNumber;
     private String password;
+    private String address;
+    private int phoneNumber;
 
     public int getDoctorId() {
         return doctorId;
@@ -54,4 +56,19 @@ public class Doctor {
 
     public String getPassword() {return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 }
