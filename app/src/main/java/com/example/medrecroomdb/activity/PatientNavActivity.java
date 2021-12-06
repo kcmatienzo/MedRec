@@ -22,8 +22,8 @@ public class PatientNavActivity extends AppCompatActivity {
     private PatientViewModel patientViewModel;
     private Button button_viewMedRec, button_updateInfo, button_bookAppt;
     String userName;
-    //String strId;
     Integer id;
+    String healthcardNumber;
     Patient patient;
 
     @Override
@@ -39,6 +39,7 @@ public class PatientNavActivity extends AppCompatActivity {
         patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
         patient = patientViewModel.findByPatientEmail(userName);
         id = patient.getPatientId();
+        healthcardNumber = patient.getHealthcardNumber();
 
         button_viewMedRec = findViewById(R.id.btn_viewMedicalRecord);
         button_updateInfo = findViewById(R.id.btn_updateInfo);
@@ -47,8 +48,8 @@ public class PatientNavActivity extends AppCompatActivity {
         button_viewMedRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentViewMedRec = new Intent(v.getContext(), PatientViewMedRecActivity.class);
-                intentViewMedRec.putExtra("userName", userName);
+                Intent intentViewMedRec = new Intent(v.getContext(), DoctorSearchResultsActivity.class);
+                intentViewMedRec.putExtra("healthcardNumber", healthcardNumber);
                 startActivity(intentViewMedRec);
             }
         });

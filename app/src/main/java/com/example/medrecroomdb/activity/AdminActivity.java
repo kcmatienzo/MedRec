@@ -167,6 +167,7 @@ public class AdminActivity extends AppCompatActivity {
                     etAdminPhoneNumber.setText("");
                     etAdminEmployeeNumber.setText("");
                     etPassword.setText("");
+                    finish();
                 }
             }
         });

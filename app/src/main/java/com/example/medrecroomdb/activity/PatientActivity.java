@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.medrecroomdb.MainActivity;
 import com.example.medrecroomdb.R;
 import com.example.medrecroomdb.model.Patient;
 import com.example.medrecroomdb.viewmodel.PatientViewModel;
@@ -56,9 +58,9 @@ public class PatientActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Integer result) {
                 if (result == 1) {
-                    Toast.makeText(PatientActivity.this, "Patient successfully saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PatientActivity.this, "Patient registration successful", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(PatientActivity.this, "Error saving patient", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PatientActivity.this, "Error registering patient", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -164,9 +166,12 @@ public class PatientActivity extends AppCompatActivity {
                     etPatientPhoneNumber.setText("");
                     etPatientHealthcardNumber.setText("");
                     etPassword.setText("");
+                    finish();
                 }
             }
+
         });
+
     }
 
     // function to check all text fields
