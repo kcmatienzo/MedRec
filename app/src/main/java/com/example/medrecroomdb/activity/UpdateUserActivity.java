@@ -51,8 +51,6 @@ public class UpdateUserActivity extends AppCompatActivity {
 
         editText_UserId.setEnabled(false);
 
-
-
         if(userType.equals("patient")){
             patientViewModel = ViewModelProviders.of(this).get(PatientViewModel.class);
             patient = patientViewModel.findByPatientId(id);
@@ -63,7 +61,6 @@ public class UpdateUserActivity extends AppCompatActivity {
             editText_address.setText(patient.getAddress());
             editText_email.setText(patient.getEmail());
             editText_phoneNumber.setText(String.valueOf(patient.getPhoneNumber()));
-            Toast.makeText(getApplicationContext(), "U", Toast.LENGTH_SHORT).show();
         }
         else if(userType.equals("doctor")){
             doctorViewModel= ViewModelProviders.of(this).get(DoctorViewModel.class);
@@ -72,9 +69,9 @@ public class UpdateUserActivity extends AppCompatActivity {
             editText_UserId.setText(String.valueOf(doctor.getDoctorId()));
             editText_firstName.setText(doctor.getFirstName());
             editText_lastName.setText(doctor.getLastName());
-            editText_address.setText(doctor.getEmail());
+            editText_address.setText(doctor.getAddress());
             editText_email.setText(doctor.getEmail());
-            editText_phoneNumber.setText(doctor.getEmail());
+            editText_phoneNumber.setText(String.valueOf(doctor.getPhoneNumber()));
 
         }else {
             Toast.makeText(getApplicationContext(), "Could Not Find User", Toast.LENGTH_SHORT).show();
@@ -84,7 +81,6 @@ public class UpdateUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                boolean allFieldsChecked = false;
                 String firstName = editText_firstName.getText().toString();
                 String lastName = editText_lastName.getText().toString();
                 String email = editText_email.getText().toString();
@@ -108,7 +104,7 @@ public class UpdateUserActivity extends AppCompatActivity {
 
                         patientViewModel.update(updatedPatient);
                         finish();
-
+                        Toast.makeText(getApplicationContext(), "Your changes have been successfully saved!", Toast.LENGTH_SHORT).show();
                     }
                     else if(userType.equals("doctor")){
                         Doctor updatedDoctor = new Doctor();
@@ -120,10 +116,12 @@ public class UpdateUserActivity extends AppCompatActivity {
                         updatedDoctor.setFirstName(firstName);
                         updatedDoctor.setLastName(lastName);
                         updatedDoctor.setEmail(email);
+                        updatedDoctor.setAddress(address);
+                        updatedDoctor.setPhoneNumber(phoneNumber);
 
                         doctorViewModel.update(updatedDoctor);
                         finish();
-
+                        Toast.makeText(getApplicationContext(), "Your changes have been successfully saved!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Could Not save", Toast.LENGTH_SHORT).show();
                     }

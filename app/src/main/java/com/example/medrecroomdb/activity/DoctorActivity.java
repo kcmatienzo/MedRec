@@ -94,17 +94,17 @@ public class DoctorActivity extends AppCompatActivity {
                     lastName.setText(doctor.getLastName());
                     row.addView(lastName);
 
-                    TextView department = new TextView(getApplicationContext());
-                    department.setTextSize(10);
-                    department.setLayoutParams(lp);
-                    department.setText(doctor.getEmail());
-                    row.addView(department);
-
                     TextView address = new TextView(getApplicationContext());
                     address.setTextSize(10);
                     address.setLayoutParams(lp);
                     address.setText(doctor.getAddress());
                     row.addView(address);
+
+                    TextView department = new TextView(getApplicationContext());
+                    department.setTextSize(10);
+                    department.setLayoutParams(lp);
+                    department.setText(doctor.getEmail());
+                    row.addView(department);
 
                     TextView phone = new TextView(getApplicationContext());
                     phone.setTextSize(10);

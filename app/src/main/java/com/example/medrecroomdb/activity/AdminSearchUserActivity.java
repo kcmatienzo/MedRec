@@ -54,10 +54,9 @@ public class AdminSearchUserActivity extends AppCompatActivity {
                     Patient patient = patientViewModel.findByPatientId(userId);
                     Doctor doctor = doctorViewModel.findByDoctorId(userId);
                     // Validate if nurseId and Password match the info in AppDatabase and if both are filled, return successful result
-                    if (patient != null){
+                    if (patient != null && patient.getPatientId() == userId){
                         Intent intentSearchResult = new Intent(v.getContext(), AdminSearchResultsActivity.class);
                         intentSearchResult.putExtra("userId", userId.toString());
-                        Toast.makeText(getApplicationContext(), userId.toString(), Toast.LENGTH_SHORT).show();
                         startActivity(intentSearchResult);
                     }
                     else if (doctor != null && doctor.getDoctorId() == userId)

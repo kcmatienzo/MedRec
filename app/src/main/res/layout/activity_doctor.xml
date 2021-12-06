@@ -246,7 +246,7 @@
                 android:text="Phone"
                 android:textSize="10sp" />
             <TextView
-                android:text="License Number"
+                android:text="License No."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"

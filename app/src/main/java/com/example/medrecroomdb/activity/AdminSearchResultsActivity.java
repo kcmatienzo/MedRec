@@ -78,8 +78,6 @@ public class AdminSearchResultsActivity extends AppCompatActivity {
                 editText_phoneNumber = findViewById(R.id.editText_phoneNumber);
                 editText_phoneNumber.setText(String.valueOf(patient.getPhoneNumber()));
 
-
-
                 editText_UserId.setEnabled(false);
                 editText_firstName.setEnabled(false);
                 editText_lastName.setEnabled(false);
@@ -88,28 +86,28 @@ public class AdminSearchResultsActivity extends AppCompatActivity {
                 editText_phoneNumber.setEnabled(false);
 
             }
-//            else{
-//                userType = "doctor";
-//                editText_UserId = findViewById(R.id.editText_UserId);
-//                editText_UserId.setText(String.valueOf(doctor.getDoctorId()));
-//                editText_firstName = findViewById(R.id.editText_firstName);
-//                editText_firstName.setText(doctor.getFirstName());
-//                editText_lastName = findViewById(R.id.editText_lastName);
-//                editText_lastName.setText(doctor.getLastName());
-//                editText_address = findViewById(R.id.editText_address);
-//                editText_address.setText(doctor.getEmail());
-//                editText_email = findViewById(R.id.editText_email);
-//                editText_email.setText(doctor.getEmail());
-//                editText_phoneNumber = findViewById(R.id.editText_phoneNumber);
-//                editText_phoneNumber.setText(doctor.getEmail());
-//
-//                editText_UserId.setEnabled(false);
-//                editText_firstName.setEnabled(false);
-//                editText_lastName.setEnabled(false);
-//                editText_address.setEnabled(false);
-//                editText_email.setEnabled(false);
-//                editText_phoneNumber.setEnabled(false);
-//            }
+            else{
+                userType = "doctor";
+                editText_UserId = findViewById(R.id.editText_UserId);
+                editText_UserId.setText(String.valueOf(doctor.getDoctorId()));
+                editText_firstName = findViewById(R.id.editText_firstName);
+                editText_firstName.setText(doctor.getFirstName());
+                editText_lastName = findViewById(R.id.editText_lastName);
+                editText_lastName.setText(doctor.getLastName());
+                editText_address = findViewById(R.id.editText_address);
+                editText_address.setText(doctor.getAddress());
+                editText_email = findViewById(R.id.editText_email);
+                editText_email.setText(doctor.getEmail());
+                editText_phoneNumber = findViewById(R.id.editText_phoneNumber);
+                editText_phoneNumber.setText(String.valueOf(doctor.getPhoneNumber()));
+
+                editText_UserId.setEnabled(false);
+                editText_firstName.setEnabled(false);
+                editText_lastName.setEnabled(false);
+                editText_address.setEnabled(false);
+                editText_email.setEnabled(false);
+                editText_phoneNumber.setEnabled(false);
+            }
         }
         catch(Exception e)
         {
